@@ -1,0 +1,224 @@
+/* readme.os2 */
+
+gDiagramm v 0.0.7 (c) Evgeny Kotsuba
+
+gDiagramm is utility for fast plotting graphs to png or jpg files
+from text data files such as CSV or log. 
+My primary target is fast data analysis of experimental data without
+too slow and too hand-used prosses of analysis with the StarOffice's StarCalc
+or MS Exel.
+
+This software is based in part on gd library
+
+1.0 Features of Gdiagramm.
+--------------------------
+Usage:  gDiagramm dataFile formatFile [startLine endLine | -oOffset NumOflines]
+
+dataFile   - text file with data to plot
+formatFile - text file with description of data format and plot options
+startLine  - number of firs line for plotting in data file 
+endLine    - number of last line for plotting in data file
+Offset     - offset from data file begining in bytes
+NumOflines - number of lines to plot
+
+To use with Offset yo can first run
+  gDiagramm dataFile formatFile
+then look at output for the strings number, then decide what string range 
+do you need, next run
+   gDiagramm dataFile formatFile startLine endLine 
+and look for output for something  like
+   File I:\dsp.log, read 38600 strings, (start at 1511181015)
+   
+1511181015 is file offset, so next time you can use
+   gDiagramm dataFile formatFile  -o1511181015 NumOflines
+
+2.0 formatFile
+--------------
+2.1 Comments begin with ';'
+;format string
+
+2.2. form.Format
+form.Format - input data format as in scanf function from C standard library,
+with some extension for date and time.
+Up to 60 fields is supported.
+
+for example:
+
+2.2.1
+data like
+1,2,3
+3,4,5
+7,8,9
+;3 integer numbers in string, comma separated
+form.Format=%i,%i,%i
+
+2.2.2
+
+1.0  2.22 3.11
+3.24 4.43 5.12
+3.14 2.78 2.94
+;3 double  numbers in string, space  separated
+form.Format=%lf %lf %lf
+;of 3 float numbers in string, space  separated
+form.Format=%f %f %f
+
+2.2.3
+
+-5.6473 -4.4664 0.1330 0.1421 03.03.2006 18:03:27
+-5.5863 -4.4154 0.1643 0.1860 03.03.2006 18:03:32
+-5.6118 -4.4179 0.1578 0.1630 03.03.2006 18:03:36
+-5.6111 -4.3976 0.1483 0.1454 03.03.2006 18:03:45
+;4 double  numbers in string date and time, space separated
+form.Format=%lf %lf %lf %lf %T
+
+2.2.4
+ 
+ Sypported type characters and their meanings are in the following table: 
+ 
+ ÚÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+ ³ CHAR- ³ TYPE OF INPUT EXPECTED            ³ TYPE OF ARGUMENT                 ³ 
+ ³ ACTER ³                                   ³                                  ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "d"   ³ Decimal integer                   ³ Pointer to INT                   ³ 
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "o"   ³ Octal integer                     ³ Pointer to UNSIGNED INT          ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "x",  ³ Hexadecimal integer               ³ Pointer to UNSIGNED INT          ³
+ ³ "X"   ³                                   ³                                  ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "i"   ³ Decimal, hexadecimal, or octal    ³ Pointer to INT                   ³ 
+ ³       ³ integer                           ³                                  ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "u"   ³ Unsigned decimal integer          ³ Pointer to UNSIGNED INT          ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "e,   ³ Floating-point value consisting   ³ Pointer to FLOAT                 ³ 
+ ³ f, g" ³ of an optional sign (+ or -);  a  ³                                  ³
+ ³       ³ series of one or more decimal     ³                                  ³
+ ³ "E,   ³ digits possibly containing a      ³                                  ³
+ ³ G"    ³ decimal point;  and an optional   ³                                  ³
+ ³       ³ exponent (e or E) followed by a   ³                                  ³
+ ³       ³ possibly signed integer value.    ³                                  ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "c"   ³ Character;  white-space charac-   ³ Pointer to CHAR large enough for ³ 
+ ³       ³ ters that are ordinarily skipped  ³ input field                      ³
+ ³       ³ are read when "c" is specified    ³                                  ³
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "s"   ³ String                            ³ Pointer to character array large ³ 
+ ³       ³                                   ³ enough for input field plus a    ³
+ ³       ³                                   ³ terminating null character       ³ 
+ ³       ³                                   ³ ("\0"), which is automatically   ³ 
+ ³       ³                                   ³ appended                         ³ 
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³       ³                                   ³  Extention.                      ³ 
+ ³ "T"   ³ Date and Time in format           ³  used as %s %s                   ³ 
+ ³       ³ Day.Month.Year HH:MM:SS           ³                                  ³ 
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "D"   ³  Date and Time in format          ³  Extention.                      ³ 
+ ³       ³  Day.Month.Year                   ³  used as %s                      ³ 
+ ÃÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÅÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ´
+ ³ "H"   ³  Time in format                   ³  Extention.                      ³ 
+ ³       ³  HH:MM:SS                         ³  used as %s                      ³ 
+ ³       ³                                   ³                                  ³ 
+ ÀÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+ 
+ prefix 'l' is used for double float, i.e.
+ %f  %e  %g  %E  %G  - float (4byte)
+%lf %le %lg %lE %lG  - double float (8byte)
+
+2.3
+;  picture dimention X 
+form.DimX=512
+;  picture dimention Y
+form.DimY=256
+;  picture output file .png , .jpg or .gif
+form.FileOut=demo.png
+;  picture Title
+form.Title=Temperature dependence 
+; Title Color
+form.TitleColor=0xa00000
+; Title Font Tiny/Small/Medium/Large/Giant = T/S/M/L/G
+form.TitleFont=M 
+;  picture backgroung color in hex RGB format
+form.BackColor=0xb0b0b0
+;  Axis X label's format
+form.FormatX=%.f
+;  Axis Y label's format
+form.FormatY=%.2f
+; AxesColor
+form.AxesColor=0x303030
+; AxesNumColor
+form.AxesNumColor = 0xa02020
+; AxesNumFont Tiny/Small/Medium/Large/Giant = T/S/M/L/G
+form.AxesNumFont=S
+;  Grid X on/off
+form.GridXon=1
+;  Grid Y on/off
+form.GridYon=1
+;  GridColor
+form.GridColor=0x808080
+; Legend Use 1/0 = yes/no
+form.LegendUse=1
+; Legend Start X position. Default=-1(Auto)
+form.LegendStartX=-1
+; Legend Start Y position. Default=-1(Auto)
+form.LegendStartY=-1
+
+3.0 Plot fields
+---------------
+Fields read with form.Format can have some attributes/options:
+
+; field can be used or not
+field0.use=1
+
+; field name is used as remark and in legend
+field0.name=Power
+; color for plotting field data in hex RGB
+field0.color = 0xbf0000
+
+; this field will be used as X coordinate
+;   if there is no field with  useAsX attribute than data string number
+;   will be used as X coordinate 
+field0.useAsX=1
+
+; mark separate points: 0-not mark, 1 - mark as  pure pixel, 2 - X-like mark
+field0.markType=0
+; mark color
+field1.markColor=0xffffff
+
+; field amplification
+field0.amplification = 1.0
+
+; field shift
+field0.shift = 0.
+
+; shift and  amplification are used as
+; Z = (Z0 + shift) * amplification
+; where Z0 is original data and Z is drawing value
+
+;if non zero, than it is  part of 2D vector so that
+; 1 - X coordinate for start point of first vector, 
+; 2 - Y coordinate for start point of first vector, 
+; 3 - X coordinate for end point of first vector, 
+; 4 - Y coordinate for end point of first vector, 
+; 5 - X coordinate for start point of second vector and so on 
+field0.vectorType=0
+
+;color of vector is color of field with vectorType=1
+
+4.0   Whats new:
+ver 0.0.7 15 Sep 2006
+- support for long files (like ~1.4 Gb data log with 40M strings)
+- support for partial data developing in form
+      gDiagramm dataFile formatFile [startLine endLine | -oOffset NumOflines]
+  where  
+   startLine and  endLine  is number of start and end lines in data file
+   Offset is the offset from data file begining and NumOflines - number of
+   lines to develop
+   
+ver 0.0.6  9 March 2006
+- gif output
+- Date and time support added
+- Color reduction for png and gif output
+- Some enhancements
+- Some bugs fixed
+- cp866 to unicode convertion support (needed for FreeType usage)

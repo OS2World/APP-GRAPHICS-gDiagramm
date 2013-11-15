@@ -1,0 +1,32 @@
+;format string
+form.Format=%lf %lf %lf %lf %lf
+form.DimX=512
+form.DimY=512
+form.FileOut=demo.png
+form.Title=Контура
+form.BackColor=0xb0b0b0
+form.FormatX=%.f
+form.FormatY=%.f
+
+;plot fields
+
+field0.use=1
+field0.name=X
+field0.color = 0x00bf00
+field0.vectorType=1
+
+field1.use=1
+field1.name=Y
+field1.color = 0x0000bf
+field1.vectorType=2
+
+field2.use=1
+field2.name=X1
+field2.vectorType=3
+
+field3.use=1
+field3.name=Y1
+field3.vectorType=4
+
+
+

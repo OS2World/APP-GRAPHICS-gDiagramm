@@ -1,0 +1,25 @@
+        Archive Filename: gDiagramm.zip
+       Short Description: utility for fast plotting graphs to png or jpg files on basis of gD library
+        Long Description: gDiagramm v0.07 - utility for fast plotting graphs to png or jpg 
+                          files from text data files such as CSV or log. It can be useful 
+                          for fast data analysis of experimental data without too slow 
+                          and too hands-used prosses of analysis with the StarOffice's StarCalc 
+                          or M$ Exel. gDiagramm can handle huge files with 1M stings. 
+
+      Proposed directory
+           for placement: /pub/os2/apps/graphics
+
+               Your name: Evgeny Kotsuba
+           Email address: [Evgen] at #os2russian
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://shatura.laser.ru/evgen/soft/gDiagramm/index.html
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: OS/2 v3 and upper
+ Additional requirements: 
+
+                Replaces: /pub/os2/apps/graphics/gDiagramm.zip

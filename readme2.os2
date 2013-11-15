@@ -1,0 +1,27 @@
+/* readme.os2 */
+
+This software is based in part on the work of
+
+- Boutell.Com, Inc. and othes (gd library 2.0.33 04 November 2004, http://www.boutell.com/gd )
+- Independent JPEG Group (jpeglib 6b of 27-Mar-1998, www.ijg.org )
+- Glenn Randers-Pehrson and othes (libpng 1.2.8  -  December 3, 2004, http://www.libpng.org )
+- Jean-loup Gailly and Mark Adler (zlib 1.2.1 - 17 November 2003,     http://www.zlib.org )
+
+
+----------------------------------
+
+
+
+Changes to Original GD Graphics Library :
+1. gd.c and gd.h fixed for normal image origin with gdNORMALIMAGEORIGIN
+
+2. added functions
+void gdImageDrawText(gdImagePtr im, gdFontPtr f, int x, int y, unsigned char *s, int color, int flCmd );
+void gdImageDrawTextUp(gdImagePtr im, gdFontPtr f, int x, int y, unsigned char *s, int color, int flCmd );
+were flCmd is analog of PM's DT_ flags.
+         gdDT_LEFT (default), gdDT_CENTER or gdDT_RIGHT can be ORed with
+         gdDT_TOP (default), gdDT_VCENTER or gdDT_BOTTOM.
+
+
+3. Font are changed to russian fonts with cp866 coding
+

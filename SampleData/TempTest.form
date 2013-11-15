@@ -1,0 +1,26 @@
+;TempTest.form
+;Data include time in msec, power in Volts from some sensor, Temperature in grad C
+;format string
+form.Format=%i,%lf,%lf,%lf
+form.DimX=512
+form.DimY=256
+form.FileOut=demo.png
+form.Title=График зависимости температуры
+form.TitleFont=L
+form.BackColor=0xb0b0b0
+form.FormatX=%.f
+form.FormatY=%.2f
+
+;plot fields
+;field1.use=1
+;field1.name=Power
+;field1.color = 0xbf0000
+
+field2.use=1
+field2.name=Temper
+field2.color = 0x00bf00
+
+field3.use=1
+field3.name=T_Воздуха
+field3.color = 0x0000bf
+

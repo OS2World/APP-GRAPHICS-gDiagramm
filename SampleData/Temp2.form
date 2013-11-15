@@ -1,0 +1,25 @@
+;Temp2.form
+;format string
+form.Format=%lf %lf %T
+form.DimX=1024
+form.DimY=512
+form.FileOut=1024x512_temp.gif
+form.Title=Mean temp + 2 sensor's diff  in grad C vs date
+form.TitleFont=L
+form.BackColor=0xb0b0b0
+form.FormatX=%.f
+form.FormatY=%.2g
+
+;plot fields
+field0.use=1
+field0.name=T
+field0.color = 0xbf0000
+
+field1.use=1
+field1.name=dT
+field1.color = 0x008000
+
+field2.use=1
+field2.name=DATEtime
+field2.useAsX=1
+
